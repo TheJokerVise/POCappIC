@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "554143220064",
+    "firebase_url": "https://pocappic.firebaseio.com",
+    "project_id": "pocappic",
+    "storage_bucket": "pocappic.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:554143220064:android:c5a541396c674e0d",
+        "android_client_info": {
+          "package_name": "mobile.intranet.infocamere.it.pocappic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "554143220064-tde209qg96ciivj3c8pgcp6bobg4fvst.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0YqtXhg_L3rjHCTqgN82CqHQZgzyxDkY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
