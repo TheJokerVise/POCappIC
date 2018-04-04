@@ -40,17 +40,5 @@ public class PresenzeActivity extends AppCompatActivity {
             }
         });
 
-        /*
-        SimpleCalendar simpleCalendar = (SimpleCalendar) findViewById(R.id.square_day);
-
-        simpleCalendar.setUserCurrentMonthYear(1, 2018);
-
-        simpleCalendar.setCallBack(new SimpleCalendar.DayClickListener() {
-            @Override
-            public void onDayClick(View view) {
-
-            }
-        });
-        */
     }
 }
