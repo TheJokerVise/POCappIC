@@ -5,140 +5,42 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="mobile.intranet.infocamere.it.pocappic.MainActivity">
+    tools:context="mobile.intranet.infocamere.it.pocappic.MainActivity"
+    android:background="#e6e6e6">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="8dp">
 
-        <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        <RelativeLayout
             android:id="@+id/card_presenze"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_gravity="center"
-            android:background="#393185"
-            android:onClick="cardPresenze_onClick"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_marginBottom="8dp"
-            card_view:cardCornerRadius="3dp"
-            card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintStart_toStartOf="parent"
-            card_view:layout_constraintTop_toTopOf="parent">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp">
 
-            <LinearLayout
+            <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
+                android:layout_height="240dp"
+                android:layout_gravity="center"
                 android:background="#393185"
-                android:baselineAligned="false">
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                card_view:cardCornerRadius="3dp"
+                card_view:layout_constraintEnd_toEndOf="parent"
+                card_view:layout_constraintStart_toStartOf="parent"
+                card_view:layout_constraintTop_toTopOf="parent">
 
-
-                <android.support.constraint.ConstraintLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight=".65">
-
-                    <TextView
-                        android:id="@+id/txt_cardMioProfilo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
-                        android:fontFamily="@font/roboto"
-                        android:paddingEnd="10dp"
-                        android:text="@string/il_mio_profilo"
-                        android:textAlignment="textStart"
-                        android:textColor="#e6e6e6"
-                        android:textSize="16sp"
-                        android:textStyle="normal|italic"
-                        card_view:layout_constraintStart_toStartOf="parent"
-                        card_view:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/txt_cardPresenze"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:fontFamily="@font/roboto"
-                        android:text="@string/presenze"
-                        android:textAlignment="textStart"
-                        android:textColor="#fff"
-                        android:textSize="28sp"
-                        android:textStyle="bold"
-                        card_view:layout_constraintStart_toStartOf="parent"
-                        card_view:layout_constraintTop_toBottomOf="@+id/txt_cardMioProfilo" />
-
-                    <TextView
-                        android:id="@+id/textView2"
-                        android:layout_width="203dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
-                        android:layout_marginStart="16dp"
-                        android:text="@string/profilo_gestisci"
-                        android:textColor="#e6e6e6"
-                        android:textSize="16sp"
-                        card_view:layout_constraintBottom_toBottomOf="parent"
-                        card_view:layout_constraintStart_toStartOf="parent" />
-
-                </android.support.constraint.ConstraintLayout>
-
-                <android.support.constraint.ConstraintLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight=".35">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginBottom="1dp"
-                        android:layout_marginEnd="1dp"
-                        android:layout_marginStart="1dp"
-                        android:layout_marginTop="1dp"
-                        android:background="@drawable/tempo2"
-                        android:fitsSystemWindows="false"
-                        card_view:layout_constraintBottom_toBottomOf="parent"
-                        card_view:layout_constraintEnd_toEndOf="parent"
-                        card_view:layout_constraintStart_toStartOf="parent"
-                        card_view:layout_constraintTop_toTopOf="parent"
-                        android:contentDescription="@string/img_per_presenze" />
-
-                </android.support.constraint.ConstraintLayout>
-
-            </LinearLayout>
-
-        </android.support.v7.widget.CardView>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:orientation="horizontal"
-            android:baselineAligned="false"
-            android:layout_below="@+id/card_presenze">
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_weight="0.7"
-                android:layout_height="match_parent">
-
-                <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/card_trasferte"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:background="#393185"
-                    android:onClick="cardPresenze_onClick"
-                    card_view:cardCornerRadius="3dp"
-                    card_view:layout_constraintEnd_toEndOf="parent"
-                    card_view:layout_constraintStart_toStartOf="parent"
-                    card_view:layout_constraintTop_toTopOf="parent">
+                    android:layout_height="match_parent">
 
                     <LinearLayout
+                        android:id="@+id/containerPresenze"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="200dp"
                         android:orientation="horizontal"
-                        android:background="#ff00ff"
+                        android:background="#393185"
                         android:baselineAligned="false">
 
 
@@ -148,7 +50,7 @@
                             android:layout_weight=".65">
 
                             <TextView
-                                android:id="@+id/txt_trasferteProfilo"
+                                android:id="@+id/txt_cardMioProfilo"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="16dp"
@@ -159,12 +61,12 @@
                                 android:textAlignment="textStart"
                                 android:textColor="#e6e6e6"
                                 android:textSize="16sp"
-                                android:textStyle="normal|italic"
+                                android:textStyle="normal"
                                 card_view:layout_constraintStart_toStartOf="parent"
                                 card_view:layout_constraintTop_toTopOf="parent" />
 
                             <TextView
-                                android:id="@+id/txt_TrasferteTitle"
+                                android:id="@+id/txt_cardPresenze"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="16dp"
@@ -175,7 +77,19 @@
                                 android:textSize="28sp"
                                 android:textStyle="bold"
                                 card_view:layout_constraintStart_toStartOf="parent"
-                                card_view:layout_constraintTop_toBottomOf="@+id/txt_trasferteProfilo" />
+                                card_view:layout_constraintTop_toBottomOf="@+id/txt_cardMioProfilo" />
+
+                            <TextView
+                                android:id="@+id/textView2"
+                                android:layout_width="203dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="16dp"
+                                android:layout_marginStart="16dp"
+                                android:text="@string/profilo_gestisci"
+                                android:textColor="#e6e6e6"
+                                android:textSize="16sp"
+                                card_view:layout_constraintBottom_toBottomOf="parent"
+                                card_view:layout_constraintStart_toStartOf="parent" />
 
                         </android.support.constraint.ConstraintLayout>
 
@@ -203,20 +117,143 @@
 
                     </LinearLayout>
 
-                </android.support.v7.widget.CardView>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_below="@+id/containerPresenze"
+                        android:onClick="enableNotsPresenze_onClick">
 
-            </RelativeLayout>
+                        <TextView
+                            android:id="@+id/txt_enableNotsPresenze"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/roboto"
+                            android:paddingTop="7dp"
+                            android:text="DISATTIVA NOTIFICHE"
+                            android:textAlignment="center"
+                            android:textSize="16sp" />
 
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_weight=".3"
-                android:layout_height="match_parent">
+                    </LinearLayout>
 
-            </RelativeLayout>
+                </RelativeLayout>
 
-        </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/card_trasferte"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_below="@id/card_presenze">
+
+            <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="#393185"
+                card_view:cardCornerRadius="3dp"
+                card_view:layout_constraintEnd_toEndOf="parent"
+                card_view:layout_constraintStart_toStartOf="parent"
+                card_view:layout_constraintTop_toTopOf="parent">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:id="@id/containerTrasferte"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:orientation="horizontal"
+                        android:background="#dc7a50"
+                        android:baselineAligned="false">
 
 
+                        <android.support.constraint.ConstraintLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight=".65">
+
+                            <TextView
+                                android:id="@+id/txt_trasferteProfilo"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginTop="16dp"
+                                android:fontFamily="@font/roboto"
+                                android:paddingEnd="10dp"
+                                android:text="@string/il_mio_profilo"
+                                android:textAlignment="textStart"
+                                android:textColor="#e6e6e6"
+                                android:textSize="16sp"
+                                android:textStyle="normal"
+                                card_view:layout_constraintStart_toStartOf="parent"
+                                card_view:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/txt_TrasferteTitle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:fontFamily="@font/roboto"
+                                android:text="Trasferte"
+                                android:textAlignment="textStart"
+                                android:textColor="#fff"
+                                android:textSize="28sp"
+                                android:textStyle="bold"
+                                card_view:layout_constraintStart_toStartOf="parent"
+                                card_view:layout_constraintTop_toBottomOf="@+id/txt_trasferteProfilo" />
+
+                        </android.support.constraint.ConstraintLayout>
+
+                        <android.support.constraint.ConstraintLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight=".35">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginBottom="1dp"
+                                android:layout_marginEnd="1dp"
+                                android:layout_marginStart="1dp"
+                                android:layout_marginTop="1dp"
+                                android:background="@drawable/trasferte"
+                                android:contentDescription="@string/img_per_presenze"
+                                android:fitsSystemWindows="false"
+                                card_view:layout_constraintBottom_toBottomOf="parent"
+                                card_view:layout_constraintEnd_toEndOf="parent"
+                                card_view:layout_constraintStart_toStartOf="parent"
+                                card_view:layout_constraintTop_toTopOf="parent" />
+
+                        </android.support.constraint.ConstraintLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_below="@+id/containerTrasferte">
+
+                        <TextView
+                            android:id="@+id/txt_enableNotsTrasferte"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/roboto"
+                            android:paddingTop="7dp"
+                            android:text="DISATTIVA NOTIFICHE"
+                            android:textAlignment="center"
+                            android:textSize="16sp" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+        </RelativeLayout>
 
     </RelativeLayout>
 

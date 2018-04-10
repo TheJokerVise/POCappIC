@@ -6,7 +6,11 @@
     tools:context="mobile.intranet.infocamere.it.pocappic.MainActivity"
     android:background="#e6e6e6">
 
+    <include layout="@layout/activity_home" />
+
     <!-- A CardView that contains a TextView -->
+
+    <!--
 
     <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/card_presenze"
@@ -105,5 +109,6 @@
         </LinearLayout>
 
     </android.support.v7.widget.CardView>
+    -->
 
 </android.support.constraint.ConstraintLayout>

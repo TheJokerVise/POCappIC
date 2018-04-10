@@ -9,11 +9,16 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -41,6 +46,51 @@ public class MainActivity extends AppCompatActivity {
         if(cursor == null) {
             insertDummy();
         }
+
+        final RelativeLayout relPresenze = (RelativeLayout) findViewById(R.id.card_presenze);
+        final RelativeLayout relTrasferte = (RelativeLayout) findViewById(R.id.card_trasferte);
+
+        // gestione long click
+        relPresenze.setOnLongClickListener(new View.OnLongClickListener() {
+
+            @Override
+            public boolean onLongClick(View view) {
+
+                RelativeLayout.LayoutParams paramsTrasferte =
+                        (RelativeLayout.LayoutParams) relTrasferte.getLayoutParams();
+
+                RelativeLayout.LayoutParams paramsPresenze =
+                        (RelativeLayout.LayoutParams) relPresenze.getLayoutParams();
+                /*
+                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+                        ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                        */
+
+                paramsTrasferte.removeRule(RelativeLayout.BELOW);
+                relTrasferte.setLayoutParams(paramsTrasferte);
+
+                paramsPresenze.addRule(RelativeLayout.BELOW, R.id.card_trasferte);
+                relPresenze.setLayoutParams(paramsPresenze);
+
+                Toast.makeText(
+                        MainActivity.this,"Long Click",
+                        Toast.LENGTH_LONG).show();
+
+                return true;
+            }
+
+        });
+
+        // gestione click semplice
+        relPresenze.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent presenze = new Intent(
+                        MainActivity.this, PresenzeActivity.class);
+                startActivity(presenze);
+            }
+        });
+
     }
 
     private void insertDummy(){
@@ -307,5 +357,11 @@ public class MainActivity extends AppCompatActivity {
     public void cardPresenze_onClick(View view) {
         Intent presenze = new Intent(this, PresenzeActivity.class);
         startActivity(presenze);
+    }
+
+    public void enableNotsPresenze_onClick(View view) {
+        Toast.makeText(MainActivity.this,
+                "Disabilita Notifiche Presenze",
+                Toast.LENGTH_SHORT).show();
     }
 }
