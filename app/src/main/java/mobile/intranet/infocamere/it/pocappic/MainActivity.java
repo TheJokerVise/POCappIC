@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         userICRepo = new UserICRepo(this);
@@ -88,6 +89,15 @@ public class MainActivity extends AppCompatActivity {
                 Intent presenze = new Intent(
                         MainActivity.this, PresenzeActivity.class);
                 startActivity(presenze);
+            }
+        });
+
+        relTrasferte.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent runtimeact = new Intent(
+                        MainActivity.this, MainRuntimeActivity.class);
+                startActivity(runtimeact);
             }
         });
 

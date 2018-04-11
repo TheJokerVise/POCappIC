@@ -52,7 +52,7 @@
         <activity
             android:name=".ScrollingProfileActivity"
             android:label="@string/title_activity_scrolling_profile"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <service android:name=".utils.MyFirebaseMessagingService">
             <intent-filter>
@@ -65,7 +65,8 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".PresenzeActivity"></activity>
+        <activity android:name=".PresenzeActivity" />
+        <activity android:name=".MainRuntimeActivity"></activity>
     </application>
 
 </manifest>

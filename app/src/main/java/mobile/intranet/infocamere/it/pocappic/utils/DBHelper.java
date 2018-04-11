@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import mobile.intranet.infocamere.it.pocappic.model.PrefUI;
 import mobile.intranet.infocamere.it.pocappic.model.UserIC;
 
 /**
@@ -43,6 +44,13 @@ public class DBHelper  extends SQLiteOpenHelper {
                 + UserIC.KEY_email + " TEXT )";
 
         db.execSQL(CREATE_TABLE_USERIC);
+
+        String CREATE_TABLE_PREFUI = "CREATE TABLE " + PrefUI.TABLE  + "("
+                + PrefUI.KEY_ROWID  + " INTEGER PRIMARY KEY AUTOINCREMENT ,"
+                + PrefUI.KEY_ID  + " INTEGER ,"
+                + PrefUI.KEY_ORDER + " TEXT )";
+
+        db.execSQL(CREATE_TABLE_PREFUI);
     }
 
     @Override
