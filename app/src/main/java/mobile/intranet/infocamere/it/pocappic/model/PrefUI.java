@@ -3,6 +3,10 @@ package mobile.intranet.infocamere.it.pocappic.model;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * Created by LucaVise on 11/04/18.
+ */
+
 public class PrefUI {
     // Labels table name
     public static final String TABLE = "prefUI";
@@ -10,12 +14,12 @@ public class PrefUI {
     // Labels Table Columns names
     public static final String KEY_ROWID = "_id";
     public static final String KEY_ID = "prefUI_id";
-    public static final String KEY_ORDER = "order";
+    public static final String KEY_orderUI = "orderUI";
 
     // property help us to keep data
     public int _id;
     public int prefUI_id;
-    public String order;
+    public String orderUI;
 
     public static String getTABLE() {
         return TABLE;
@@ -29,8 +33,8 @@ public class PrefUI {
         return KEY_ID;
     }
 
-    public static String getKeyOrder() {
-        return KEY_ORDER;
+    public static String getKeyOrderUI() {
+        return KEY_orderUI;
     }
 
     public int get_id() {
@@ -49,12 +53,12 @@ public class PrefUI {
         this.prefUI_id = prefUI_id;
     }
 
-    public String getOrder() {
-        return order;
+    public String getOrderUI() {
+        return orderUI;
     }
 
-    public void setOrder(String order) {
-        this.order = order;
+    public void setOrderUI(String orderUI) {
+        this.orderUI = orderUI;
     }
 
     @Override
@@ -63,7 +67,7 @@ public class PrefUI {
         return "PrefUI{" +
                 "_id=" + _id +
                 ", prefUI_id=" + prefUI_id +
-                ", order='" + order + '\'' +
+                ", orderUI='" + orderUI + '\'' +
                 '}';
     }
 
@@ -73,7 +77,7 @@ public class PrefUI {
 
         jo.put("_id", _id);
         jo.put("prefUI", prefUI_id);
-        jo.put("order", order);
+        jo.put("orderUI", orderUI);
 
         return jo;
     }

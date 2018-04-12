@@ -1,8 +1,10 @@
 package mobile.intranet.infocamere.it.pocappic;
 
 import android.annotation.TargetApi;
+import android.app.AlertDialog;
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Build;
@@ -12,6 +14,7 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
@@ -27,29 +30,110 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GetTokenResult;
 
+import mobile.intranet.infocamere.it.pocappic.model.PrefUI;
 import mobile.intranet.infocamere.it.pocappic.model.UserIC;
+import mobile.intranet.infocamere.it.pocappic.utils.GeneralUtils;
+import mobile.intranet.infocamere.it.pocappic.utils.PrefUIRepo;
 import mobile.intranet.infocamere.it.pocappic.utils.UserICRepo;
 
 public class MainActivity extends AppCompatActivity {
 
     Cursor cursor;
     UserICRepo userICRepo;
+    Cursor cursorPref;
+    PrefUIRepo prefUIRepo;
     private final static String TAG = MainActivity.class.getName().toString();
+    String[] orderLayouts = null;
+    PrefUI prefUI = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_runtime);
         userICRepo = new UserICRepo(this);
         cursor = userICRepo.getUsersList();
+        prefUIRepo = new PrefUIRepo(this);
+        cursorPref = prefUIRepo.getPrefUIList();
 
         if(cursor == null) {
             insertDummy();
         }
 
+        if (cursorPref == null) {
+            Log.i("insert PREFUI","INSERT PREFUI");
+            insertPrefUI();
+            orderLayouts = GeneralUtils.getOrderLayouts("1-2");
+        }
+        else {
+            Log.i("PREFUI","Leggo PREFUI");
+            prefUI = prefUIRepo.getPrefUIById(0);
+            orderLayouts = GeneralUtils.getOrderLayouts(prefUI.getOrderUI());
+        }
+
+        RelativeLayout rl = (RelativeLayout) findViewById(R.id.containerTotal);
+        LayoutInflater inflater = null;
+        RelativeLayout layoutPresenze = null;
+        RelativeLayout layoutTrasferte = null;
+        RelativeLayout.LayoutParams paramsTrasferte, paramsPresenze = null;
+
+        inflater = LayoutInflater.from(getApplicationContext());
+        layoutPresenze = (RelativeLayout) inflater.inflate(
+                R.layout.layout_presenze, null, false);
+        layoutTrasferte = (RelativeLayout) inflater.inflate(
+                R.layout.layout_trasferte, null, false);
+
+
+        rl.addView(layoutPresenze);
+        rl.addView(layoutTrasferte);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        Log.i("ONSTART", "ONSTART");
         final RelativeLayout relPresenze = (RelativeLayout) findViewById(R.id.card_presenze);
         final RelativeLayout relTrasferte = (RelativeLayout) findViewById(R.id.card_trasferte);
+        RelativeLayout rl = (RelativeLayout) findViewById(R.id.containerTotal);
+        LayoutInflater inflater = null;
+        RelativeLayout layoutPresenze = null;
+        RelativeLayout layoutTrasferte = null;
+        RelativeLayout.LayoutParams paramsTrasferte, paramsPresenze = null;
+        String previous = "";
+
+        for (int i=0; i<orderLayouts.length; i++) {
+            Log.i("Dentro al FOR", "DENTRO AL FOR " + orderLayouts[i]);
+            if (orderLayouts[i].trim().equals("1")) {
+                Log.i("Dentro al FOR", "Presenze manager");
+                // PRESENZE
+
+                if (previous != "") {
+                    if (previous.equals("2")) {
+                        Log.i("Dentro al FOR", "So che prima di me ci sono le trasferte");
+                        paramsPresenze =
+                                (RelativeLayout.LayoutParams) relPresenze.getLayoutParams();
+                        paramsPresenze.addRule(RelativeLayout.BELOW, R.id.card_trasferte);
+                        relPresenze.setLayoutParams(paramsPresenze);
+                    }
+                }
+            }
+            else if (orderLayouts[i].trim().equals("2")) {
+                Log.i("Dentro al FOR", "Trasferte manager");
+                // TRASFERTE
+
+                if (previous != "") {
+                    if (previous.equals("1")) {
+                        Log.i("Dentro al FOR", "So che prima di me ci sono le presenze");
+                        paramsTrasferte =
+                                (RelativeLayout.LayoutParams) relTrasferte.getLayoutParams();
+                        paramsTrasferte.addRule(RelativeLayout.BELOW, R.id.card_presenze);
+                        relTrasferte.setLayoutParams(paramsTrasferte);
+                    }
+                }
+            }
+            previous = orderLayouts[i];
+        }
 
         // gestione long click
         relPresenze.setOnLongClickListener(new View.OnLongClickListener() {
@@ -57,21 +141,40 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onLongClick(View view) {
 
-                RelativeLayout.LayoutParams paramsTrasferte =
-                        (RelativeLayout.LayoutParams) relTrasferte.getLayoutParams();
+                AlertDialog.Builder adb;
+                adb = new AlertDialog.Builder(MainActivity.this);
 
-                RelativeLayout.LayoutParams paramsPresenze =
-                        (RelativeLayout.LayoutParams) relPresenze.getLayoutParams();
-                /*
-                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-                        ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                        */
+                adb.setTitle("Gestisci la tua sezione PRESENZE");
+                // N.B. non usare setMessage altrimenti setItems non funziona
+                // (uno esclude l'altro)
 
-                paramsTrasferte.removeRule(RelativeLayout.BELOW);
-                relTrasferte.setLayoutParams(paramsTrasferte);
+                final String[] opzioni = {"Sposta sotto", "Sposta sopra", "Nascondi sezione"};
 
-                paramsPresenze.addRule(RelativeLayout.BELOW, R.id.card_trasferte);
-                relPresenze.setLayoutParams(paramsPresenze);
+                adb.setItems(opzioni, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(
+                                getApplicationContext(),
+                                "Hai scelto l'opzione " + opzioni[i] + " n. " + i,
+                                Toast.LENGTH_SHORT).show();
+
+                        if (true) {
+                            RelativeLayout.LayoutParams paramsTrasferte =
+                                    (RelativeLayout.LayoutParams) relTrasferte.getLayoutParams();
+
+                            RelativeLayout.LayoutParams paramsPresenze =
+                                    (RelativeLayout.LayoutParams) relPresenze.getLayoutParams();
+
+                            paramsTrasferte.removeRule(RelativeLayout.BELOW);
+                            relTrasferte.setLayoutParams(paramsTrasferte);
+
+                            paramsPresenze.addRule(RelativeLayout.BELOW, R.id.card_trasferte);
+                            relPresenze.setLayoutParams(paramsPresenze);
+                        }
+                    }
+                });
+
+                adb.create().show();
 
                 Toast.makeText(
                         MainActivity.this,"Long Click",
@@ -95,9 +198,9 @@ public class MainActivity extends AppCompatActivity {
         relTrasferte.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent runtimeact = new Intent(
-                        MainActivity.this, MainRuntimeActivity.class);
-                startActivity(runtimeact);
+                Intent other = new Intent(
+                        MainActivity.this, OtherActivity.class);
+                startActivity(other);
             }
         });
 
@@ -299,6 +402,13 @@ public class MainActivity extends AppCompatActivity {
         user.setOffice("PD-423");
         user.setMatricola("2019");
         userICRepo.insert(user);
+    }
+
+    public void insertPrefUI() {
+        PrefUI prefUI = new PrefUI();
+        prefUI.prefUI_id = 1;
+        prefUI.orderUI = "1-2";
+        prefUIRepo.insert(prefUI);
     }
 
     @Override

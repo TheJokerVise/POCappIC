@@ -1,5 +1,7 @@
 package mobile.intranet.infocamere.it.pocappic.utils;
 
+import android.util.Log;
+
 /**
  * Created by LucaVise on 16/03/18.
  */
@@ -22,5 +24,11 @@ public class GeneralUtils {
         }
 
         return typicalSearch;
+    }
+
+    public static String[] getOrderLayouts(String orderUI) {
+        String[] orderLayouts = orderUI.split("-");
+
+        return orderLayouts;
     }
 }

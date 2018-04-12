@@ -60,8 +60,6 @@ public class UserICRepo {
             return null;
         }
 
-        Log.i("UserICRepo", "getUserList ------");
-
         return cursor;
     }
 
