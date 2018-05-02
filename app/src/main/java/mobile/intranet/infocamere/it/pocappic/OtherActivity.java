@@ -1,59 +1,72 @@
 package mobile.intranet.infocamere.it.pocappic;
 
-import android.app.SearchManager;
-import android.content.Context;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
-import android.view.Menu;
-import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import mobile.intranet.infocamere.it.pocappic.model.ItemUI;
-import mobile.intranet.infocamere.it.pocappic.utils.ItemUIAdapter;
+import mobile.intranet.infocamere.it.pocappic.utils.RVAdapter;
+
 
 public class OtherActivity extends AppCompatActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
 
+
+    /** Called when the activity is first created. */
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_other);
 
-        /*
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        mRecyclerView = (RecyclerView) findViewById(R.id.rv);
 
-        PresenceFragment fragment = new PresenceFragment();
-        fragmentTransaction.add(R.id.presence_container, fragment);
-        fragmentTransaction.commit();
-        */
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+        mRecyclerView.setHasFixedSize(true);
 
-        ItemUIAdapter adapter = new ItemUIAdapter(generateSimpleList());
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.list_itemUI);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adapter);
+        // use a linear layout manager
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
 
+        // specify an adapter (see also next example)
+        RVAdapter adapter = new RVAdapter(generateItemUi());
+        mRecyclerView.setAdapter(adapter);
     }
 
-    public void btnOpenSearch_onClick(View view) {
-        onSearchRequested();
-    }
-
-    private List<ItemUI> generateSimpleList() {
+    private List<ItemUI> generateItemUi() {
 
         List<ItemUI> itemUIModelList = new ArrayList<>();
         ItemUI itemUI = null;
 
+        itemUI = new ItemUI("#393185", "item_1", "Il mio profilo",
+                "Presenze", "Gestisci il tuo foglio presenze. Tocca per vedere " +
+                "timbrature, anomalie, salidi e giustificativi.", "tempo2");
+
+        itemUIModelList.add(itemUI);
+
+        itemUI = new ItemUI("#E83E00", "item_2", "Il mio profilo",
+                "Trasferte", "", "trasferte");
+
+        itemUIModelList.add(itemUI);
+
+        itemUI = new ItemUI("#496A8D", "item_2", "Il mio profilo",
+                "Trasferte", "", "trasferte");
+
+        itemUIModelList.add(itemUI);
+
+        itemUI = new ItemUI("#3F9CDC", "item_2", "Il mio profilo",
+                "Trasferte", "", "trasferte");
+
+        itemUIModelList.add(itemUI);
+
+        /*
         for (int i = 0; i < 10; i++) {
             if (i == 0) {
                 itemUI = new ItemUI("#33ccff", "item_" + i, "Profilo Item " + i,
@@ -98,19 +111,10 @@ public class OtherActivity extends AppCompatActivity {
 
             itemUIModelList.add(itemUI);
         }
+        */
 
         return itemUIModelList;
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        // Retrieve the SearchView and plug it into SearchManager
-        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.action_search));
-        SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-
-        return true;
-    }
 
 }

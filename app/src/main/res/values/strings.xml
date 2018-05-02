@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">POCappIC</string>
+    <string name="app_name">IC APP</string>
     <string name="search_hint">Cerca un collega</string>
     <string name="title_activity_user_profile"></string>
 
@@ -117,4 +117,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="element_text">Element</string>
+    <string name="grid_layout_manager">Grid Layout Manager</string>
+    <string name="linear_layout_manager">Linear Layout Manager</string>
 </resources>

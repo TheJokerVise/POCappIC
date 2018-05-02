@@ -4,7 +4,7 @@
     android:id="@+id/presence_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PresenceFragment">
+    >
 
     <RelativeLayout
         android:id="@+id/card_presenze"
