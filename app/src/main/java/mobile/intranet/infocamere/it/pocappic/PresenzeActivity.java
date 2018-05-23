@@ -1,10 +1,14 @@
 package mobile.intranet.infocamere.it.pocappic;
 
 import android.app.DatePickerDialog;
+import android.app.SearchManager;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.SearchView;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CalendarView;
@@ -40,5 +44,16 @@ public class PresenzeActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        // Retrieve the SearchView and plug it into SearchManager
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.action_search));
+        SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+
+        return true;
     }
 }

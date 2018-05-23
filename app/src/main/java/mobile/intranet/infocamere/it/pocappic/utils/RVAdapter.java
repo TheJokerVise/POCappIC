@@ -17,6 +17,7 @@ import android.widget.Toast;
 import java.util.List;
 
 import mobile.intranet.infocamere.it.pocappic.CardExActivity;
+import mobile.intranet.infocamere.it.pocappic.DrawerNavMainActivity;
 import mobile.intranet.infocamere.it.pocappic.PresenzeActivity;
 import mobile.intranet.infocamere.it.pocappic.R;
 import mobile.intranet.infocamere.it.pocappic.model.ItemUI;
@@ -96,6 +97,10 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ItemUIViewHolder> 
                         v.getContext().startActivity(trasferte);
 
                         break;
+
+                    case 2:
+                        Intent drawerMain = new Intent(v.getContext(), DrawerNavMainActivity.class);
+                        v.getContext().startActivity(drawerMain);
 
                     default:
                         Toast.makeText(

@@ -28,7 +28,6 @@
                 android:background="#393185"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
-                card_view:cardCornerRadius="3dp"
                 card_view:layout_constraintEnd_toEndOf="parent"
                 card_view:layout_constraintStart_toStartOf="parent"
                 card_view:layout_constraintTop_toTopOf="parent">
@@ -156,7 +155,6 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:background="#393185"
-                card_view:cardCornerRadius="3dp"
                 card_view:layout_constraintEnd_toEndOf="parent"
                 card_view:layout_constraintStart_toStartOf="parent"
                 card_view:layout_constraintTop_toTopOf="parent">

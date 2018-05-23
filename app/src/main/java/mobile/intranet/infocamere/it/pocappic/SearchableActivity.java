@@ -120,6 +120,7 @@ public class SearchableActivity extends AppCompatActivity {
     }
 
     private void doMySearch(String query) {
+        Log.i("doMySearch", "ciao");
 
         this.generalUtils = new GeneralUtils();
         TypicalSearch typicalSearch = this.generalUtils.getTypicalSearch(query);
@@ -212,7 +213,8 @@ public class SearchableActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
         // Retrieve the SearchView and plug it into SearchManager
-        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.action_search));
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(
+                R.id.action_search));
         SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
 

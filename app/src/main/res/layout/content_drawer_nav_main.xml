@@ -4,9 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:background="#e6e6e6"
-    tools:context="mobile.intranet.infocamere.it.pocappic.MainActivity"
-    tools:layout_editor_absoluteY="81dp">
+    tools:context="mobile.intranet.infocamere.it.pocappic.DrawerNavMainActivity"
+    tools:layout_editor_absoluteY="81dp"
+    tools:showIn="@layout/app_bar_drawer_nav_main">
 
     <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/rv"

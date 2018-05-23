@@ -15,10 +15,10 @@
         android:background="#393185"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        card_view:cardCornerRadius="3dp"
         card_view:layout_constraintEnd_toEndOf="parent"
         card_view:layout_constraintStart_toStartOf="parent"
-        card_view:layout_constraintTop_toTopOf="parent">
+        card_view:layout_constraintTop_toTopOf="parent"
+        card_view:cardCornerRadius="0dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -91,10 +91,6 @@
                         android:id="@+id/img_section"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="1dp"
-                        android:layout_marginEnd="1dp"
-                        android:layout_marginStart="1dp"
-                        android:layout_marginTop="1dp"
                         android:background="@drawable/tempo2"
                         android:contentDescription="@string/img_per_presenze"
                         android:fitsSystemWindows="false"
