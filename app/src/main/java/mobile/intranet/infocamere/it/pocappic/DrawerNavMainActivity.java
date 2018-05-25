@@ -332,6 +332,19 @@ public class DrawerNavMainActivity extends AppCompatActivity
 
     private List<ItemUI> generateItemUi() {
 
+        Cursor c = svcICRepo.getServiceICList();
+        ServiceIC svc = new ServiceIC();
+
+        if (c.moveToFirst()) {
+            do {
+                svc.setSvcId(c.getString(c.getColumnIndex(ServiceIC.KEY_ID)));
+                svc.setSvcName(c.getString(c.getColumnIndex(ServiceIC.KEY_serviceName)));
+                svc.setSvcVisible(
+                        c.getInt(c.getColumnIndex(ServiceIC.KEY_serviceVisible)) > 0);
+            } while (c.moveToNext());
+        }
+
+
         List<ItemUI> itemUIModelList = new ArrayList<>();
         ItemUI itemUI = null;
 
