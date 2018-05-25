@@ -42,7 +42,7 @@
                 android:name="android.app.default_searchable"
                 android:value=".SearchableActivity" />
         </activity>
-        <activity android:name=".CardExActivity"></activity>
+        <activity android:name=".CardExActivity" />
         <activity
             android:name=".UserProfileActivity"
             android:label="@string/title_activity_user_profile"
@@ -57,26 +57,22 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
         <service android:name=".utils.FirebaseIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
 
-        <activity android:name=".PresenzeActivity"></activity>
-
+        <activity android:name=".PresenzeActivity" />
         <activity android:name=".MainRuntimeActivity" />
-
-        <activity android:name=".DrawerNavMainActivity"
+        <activity
+            android:name=".DrawerNavMainActivity"
             android:label="@string/title_activity_user_profile"
-            android:theme="@style/AppTheme.NoActionBar" >
-
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.app.default_searchable"
                 android:value=".SearchableActivity" />
         </activity>
-
     </application>
 
 </manifest>

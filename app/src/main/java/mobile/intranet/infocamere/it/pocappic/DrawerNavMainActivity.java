@@ -28,8 +28,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mobile.intranet.infocamere.it.pocappic.model.ItemUI;
+import mobile.intranet.infocamere.it.pocappic.model.ServiceIC;
 import mobile.intranet.infocamere.it.pocappic.model.UserIC;
 import mobile.intranet.infocamere.it.pocappic.utils.RVAdapter;
+import mobile.intranet.infocamere.it.pocappic.utils.ServiceICRepo;
 import mobile.intranet.infocamere.it.pocappic.utils.UserICRepo;
 
 public class DrawerNavMainActivity extends AppCompatActivity
@@ -40,6 +42,8 @@ public class DrawerNavMainActivity extends AppCompatActivity
     private RecyclerView.LayoutManager mLayoutManager;
     private Cursor cursor;
     private UserICRepo userICRepo;
+    private Cursor cursorSvcIC;
+    private ServiceICRepo svcICRepo;
     private final static String TAG = DrawerNavMainActivity.class.getName().toString();
 
     @Override
@@ -68,7 +72,7 @@ public class DrawerNavMainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         /*
-        Inizia la costruzione della pagina
+        Inizia la costruzione del contenuto della pagina
          */
         mRecyclerView = (RecyclerView) findViewById(R.id.rv);
 
@@ -84,11 +88,22 @@ public class DrawerNavMainActivity extends AppCompatActivity
         RVAdapter adapter = new RVAdapter(generateItemUi());
         mRecyclerView.setAdapter(adapter);
 
+        /*
+        Gestione inserimento utenti
+         */
         userICRepo = new UserICRepo(this);
         cursor = userICRepo.getUsersList();
-
         if(cursor == null) {
             insertDummy();
+        }
+
+        /*
+        Gestione inserimento Servici IC
+         */
+        svcICRepo = new ServiceICRepo(this);
+        cursorSvcIC = svcICRepo.getServiceICList();
+        if (cursorSvcIC == null) {
+            insertServicesIC();
         }
     }
 
@@ -290,10 +305,36 @@ public class DrawerNavMainActivity extends AppCompatActivity
         userICRepo.insert(user);
     }
 
+    private void insertServicesIC() {
+        ServiceIC svcIC = new ServiceIC();
+        svcIC.setSvcId("1");
+        svcIC.setSvcName("Presenze");
+        svcIC.setSvcVisible(true);
+        svcICRepo.insert(svcIC);
+
+        svcIC = new ServiceIC();
+        svcIC.setSvcId("2");
+        svcIC.setSvcName("Trasferte");
+        svcIC.setSvcVisible(true);
+        svcICRepo.insert(svcIC);
+
+        svcIC = new ServiceIC();
+        svcIC.setSvcId("3");
+        svcIC.setSvcName("News");
+        svcIC.setSvcVisible(true);
+        svcICRepo.insert(svcIC);
+
+        svcIC = new ServiceIC();
+        svcIC.setSvcId("4");
+        svcIC.setSvcName("Uscita");
+        svcIC.setSvcVisible(true);
+    }
+
     private List<ItemUI> generateItemUi() {
 
         List<ItemUI> itemUIModelList = new ArrayList<>();
         ItemUI itemUI = null;
+
 
         itemUI = new ItemUI("#393185", "item_1", "Il mio profilo",
                 "Presenze", "Gestisci il tuo foglio presenze. Tocca per vedere " +
@@ -318,61 +359,6 @@ public class DrawerNavMainActivity extends AppCompatActivity
 
         return itemUIModelList;
     }
-
-    /*
-    @Override
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        getMenuInflater().inflate(R.menu.options_menu, menu);
-
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-
-            SearchManager manager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-            SearchView search = (SearchView) menu.findItem(R.id.search).getActionView();
-            search.setSearchableInfo(manager.getSearchableInfo(getComponentName()));
-            search.setSubmitButtonEnabled(true);
-
-            search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-
-                @Override
-                public boolean onQueryTextSubmit(String s) {
-                    cursor = userICRepo.getUserListByKeyword(s);
-
-                    if (cursor == null) {
-                        Toast.makeText(
-                                DrawerNavMainActivity.this,"No records found!",
-                                Toast.LENGTH_LONG).show();
-                    }
-                    else {
-                        Toast.makeText(
-                                DrawerNavMainActivity.this,
-                                cursor.getCount() + " records found!",
-                                Toast.LENGTH_LONG).show();
-                    }
-                    // customAdapter.swapCursor(cursor);
-                    Log.i(TAG, "onQueryTextSubmit FINE TOAST");
-
-                    return false;
-                }
-
-                @Override
-                public boolean onQueryTextChange(String s) {
-                    Log.i(TAG, "onQueryTextChange " + s);
-                    cursor = userICRepo.getUserListByKeyword(s);
-                    if (cursor != null) {
-                        // customAdapter.swapCursor(cursor);
-                    }
-                    return false;
-                }
-
-            });
-
-        }
-
-        return true;
-    }
-    */
 
     @Override
     public void onBackPressed() {

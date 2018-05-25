@@ -102,6 +102,8 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ItemUIViewHolder> 
                         Intent drawerMain = new Intent(v.getContext(), DrawerNavMainActivity.class);
                         v.getContext().startActivity(drawerMain);
 
+                        break;
+
                     default:
                         Toast.makeText(
                                 v.getContext(),
