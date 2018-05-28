@@ -1,3 +1,10 @@
+/*
+ * Copyright (c)
+ * Created by Luca Visentin - yyi4216
+ * 28/05/18 14.53
+ *
+ */
+
 package mobile.intranet.infocamere.it.pocappic;
 
 import android.annotation.TargetApi;
