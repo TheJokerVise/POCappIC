@@ -72,23 +72,6 @@ public class DrawerNavMainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         /*
-        Inizia la costruzione del contenuto della pagina
-         */
-        mRecyclerView = (RecyclerView) findViewById(R.id.rv);
-
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
-        mRecyclerView.setHasFixedSize(true);
-
-        // use a linear layout manager
-        mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-
-        // specify an adapter (see also next example)
-        RVAdapter adapter = new RVAdapter(generateItemUi());
-        mRecyclerView.setAdapter(adapter);
-
-        /*
         Gestione inserimento utenti
          */
         userICRepo = new UserICRepo(this);
@@ -105,6 +88,23 @@ public class DrawerNavMainActivity extends AppCompatActivity
         if (cursorSvcIC == null) {
             insertServicesIC();
         }
+
+        /*
+        Inizia la costruzione del contenuto della pagina
+        */
+        mRecyclerView = (RecyclerView) findViewById(R.id.rv);
+
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+        mRecyclerView.setHasFixedSize(true);
+
+        // use a linear layout manager
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        // specify an adapter (see also next example)
+        RVAdapter adapter = new RVAdapter(generateItemUi());
+        mRecyclerView.setAdapter(adapter);
     }
 
     private void insertDummy(){
@@ -328,12 +328,15 @@ public class DrawerNavMainActivity extends AppCompatActivity
         svcIC.setSvcId("4");
         svcIC.setSvcName("Uscita");
         svcIC.setSvcVisible(true);
+        svcICRepo.insert(svcIC);
     }
 
     private List<ItemUI> generateItemUi() {
 
         Cursor c = svcICRepo.getServiceICList();
         ServiceIC svc = new ServiceIC();
+        List<ItemUI> itemUIModelList = new ArrayList<>();
+        ItemUI itemUI = null;
 
         if (c.moveToFirst()) {
             do {
@@ -341,14 +344,30 @@ public class DrawerNavMainActivity extends AppCompatActivity
                 svc.setSvcName(c.getString(c.getColumnIndex(ServiceIC.KEY_serviceName)));
                 svc.setSvcVisible(
                         c.getInt(c.getColumnIndex(ServiceIC.KEY_serviceVisible)) > 0);
+
+                if (svc.getSvcName().contains("Presenze")) {
+                    Log.i("GENERATE", "PRESENZE");
+                    itemUI = new ItemUI("#393185", svc.getSvcId(), "Il mio profilo",
+                            svc.getSvcName(), "Gestisci il tuo foglio presenze. Tocca per vedere " +
+                            "timbrature, anomalie, salidi e giustificativi.", "tempo2");
+                }
+                else if (svc.getSvcName().contains("Trasferte")) {
+                    Log.i("GENERATE", "TRASFERTE");
+                    itemUI = new ItemUI("#E83E00", svc.getSvcId(), "Il mio profilo",
+                            svc.getSvcName(), "Gestisci le tue trasferte", "trasferte");
+                }
+                else {
+                    Log.i("GENERATE", "ALTRO");
+                    itemUI = new ItemUI("#3F9CDC", svc.getSvcId(), "Il mio profilo",
+                            svc.getSvcName(), "Gestisci il tuo foglio presenze. Tocca per vedere " +
+                            "timbrature, anomalie, salidi e giustificativi.", "tempo2");
+                }
+
+                itemUIModelList.add(itemUI);
             } while (c.moveToNext());
         }
 
-
-        List<ItemUI> itemUIModelList = new ArrayList<>();
-        ItemUI itemUI = null;
-
-
+        /*
         itemUI = new ItemUI("#393185", "item_1", "Il mio profilo",
                 "Presenze", "Gestisci il tuo foglio presenze. Tocca per vedere " +
                 "timbrature, anomalie, salidi e giustificativi.", "tempo2");
@@ -369,6 +388,7 @@ public class DrawerNavMainActivity extends AppCompatActivity
                 "Trasferte", "", "trasferte");
 
         itemUIModelList.add(itemUI);
+        */
 
         return itemUIModelList;
     }

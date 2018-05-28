@@ -17,7 +17,7 @@ public class DBHelper  extends SQLiteOpenHelper {
     //version number to upgrade database version
     //each time if you Add, Edit table, you need to change the
     //version number.
-    private static final int DATABASE_VERSION = 22;
+    private static final int DATABASE_VERSION = 24;
 
     // Database Name
     private static final String DATABASE_NAME = "ic_app";
@@ -52,7 +52,7 @@ public class DBHelper  extends SQLiteOpenHelper {
         String CREATE_TABLE_SERVICEIC = "CREATE TABLE " + ServiceIC.TABLE  + "("
                 + ServiceIC.KEY_ROWID  + " INTEGER PRIMARY KEY AUTOINCREMENT ,"
                 + ServiceIC.KEY_ID  + " TEXT ,"
-                + ServiceIC.KEY_serviceName + " TEXT )"
+                + ServiceIC.KEY_serviceName + " TEXT ,"
                 + ServiceIC.KEY_serviceVisible + " TEXT )";
 
         db.execSQL(CREATE_TABLE_USERIC);
